@@ -6,9 +6,9 @@
 
 ::============================================================================
 ::
-::   IDM Activation Script (IAS)
+::  IDM 激活脚本 （IAS）
 ::
-::   Homepages: https://github.com/lstprjct/IDM-Activation-Script
+::   主页: https://github.com/lstprjct/IDM-Activation-Script
 ::              https://t.me/ModByPiash/5
 ::
 ::       Telegram: @Stripe_op
@@ -70,10 +70,10 @@ set "mas=https://github.com/lstprjct/IDM-Activation-Script/wiki/"
 sc query Null | find /i "RUNNING"
 if %errorlevel% NEQ 0 (
 echo:
-echo Null service is not running, script may crash...
+echo 空服务未运行，脚本可能会崩溃...
 echo:
 echo:
-echo Help - %mas%IAS-Help#troubleshoot
+echo 帮助 - %mas%IAS-帮助#解决
 echo:
 echo:
 ping 127.0.0.1 -n 10
@@ -166,7 +166,7 @@ goto done2
 
 for %%# in (powershell.exe) do @if "%%~$PATH:#"=="" (
 %nceline%
-echo Unable to find powershell.exe in the system.
+echo 在系统中找不到powershell.exe。
 goto done2
 )
 
@@ -193,10 +193,10 @@ setlocal EnableDelayedExpansion
 echo "!_batf!" | find /i "!_ttemp!" %nul1% && (
 if /i not "!_work!"=="!_ttemp!" (
 %eline%
-echo Script is launched from the temp folder,
-echo Most likely you are running the script directly from the archive file.
+echo 脚本从临时文件夹启动，
+echo 最有可能的是，您直接从存档文件运行脚本。
 echo:
-echo Extract the archive file and launch the script from the extracted folder.
+echo 解压缩存档文件并从解压缩的文件夹中启动脚本。
 goto done2
 )
 )
@@ -211,10 +211,10 @@ REM :PowerShellTest: $ExecutionContext.SessionState.LanguageMode :PowerShellTest
 %eline%
 %psc% $ExecutionContext.SessionState.LanguageMode
 echo:
-echo PowerShell is not working. Aborting...
-echo If you have applied restrictions on Powershell then undo those changes.
+echo PowerShell 无法正常工作。中止。。。
+echo 如果已对 Powershell 应用了限制，请撤消这些更改。
 echo:
-echo Check this page for help. %mas%IAS-Help#troubleshoot
+echo 请查看此页面以获取帮助。 %mas%IAS-帮助#解决
 goto done2
 )
 
@@ -225,8 +225,8 @@ goto done2
 %nul1% fltmc || (
 if not defined _elev %psc% "start cmd.exe -arg '/c \"!_PSarg!\"' -verb runas" && exit /b
 %eline%
-echo This script requires admin privileges.
-echo To do so, right click on this script and select 'Run as administrator'.
+echo 此脚本需要管理员权限。
+echo 为此，请右键单击此脚本，然后选择“以管理员身份运行”
 goto done2
 )
 
@@ -269,7 +269,7 @@ cls
 title  IDM Activation Script %iasver%
 
 echo:
-echo Initializing...
+echo 初始化。。。
 
 ::  Check WMI
 
@@ -277,9 +277,9 @@ echo Initializing...
 %eline%
 %psc% "Get-WmiObject -Class Win32_ComputerSystem | Select-Object -Property CreationClassName"
 echo:
-echo WMI is not working. Aborting...
+echo WMI 无法正常工作。中止。。。
 echo:
-echo Check this page for help. %mas%IAS-Help#troubleshoot
+echo 请查看此页面以获取帮助。 %mas%IAS-帮助#解决
 goto done2
 )
 
@@ -296,9 +296,9 @@ reg query HKU\%_sid%\Software %nul% || (
 %eline%
 echo:
 echo [%_sid%]
-echo User Account SID not found. Aborting...
+echo 未找到用户帐户 SID。中止。。。
 echo:
-echo Check this page for help. %mas%IAS-Help#troubleshoot
+echo 请查看此页面以获取帮助。 %mas%IAS-帮助#解决
 goto done2
 )
 
@@ -348,9 +348,9 @@ set "idmcheck=tasklist /fi "imagename eq idman.exe" | findstr /i "idman.exe" %nu
 %nul% reg add %CLSID2%\IAS_TEST
 %nul% reg query %CLSID2%\IAS_TEST || (
 %eline%
-echo Failed to write in %CLSID2%
+echo 写入失败 %CLSID2%
 echo:
-echo Check this page for help. %mas%IAS-Help#troubleshoot
+echo 请查看此页面以获取帮助。 %mas%IAS-帮助#解决
 goto done2
 )
 
@@ -377,14 +377,14 @@ echo:               Telegram: @ModByPiash
 echo:               Github: https://github.com/lstprjct
 echo:            ___________________________________________________ 
 echo:                                                               
-echo:               [1] Activate
-echo:               [2] Freeze Trial
-echo:               [3] Reset Activation / Trial
+echo:               [1] 激活
+echo:               [2] 冻结试用
+echo:               [3] 重置激活/试用
 echo:               _____________________________________________   
 echo:                                                               
-echo:               [4] Download IDM
-echo:               [5] Help
-echo:               [0] Exit
+echo:               [4] 下载 IDM
+echo:               [5] 帮助
+echo:               [0] 退出
 echo:            ___________________________________________________
 echo:         
 call :_color2 %_White% "             " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,5,0]"
@@ -438,7 +438,7 @@ goto done
 :delete_queue
 
 echo:
-echo Deleting IDM registry keys...
+echo 正在删除 IDM 注册表项...
 echo:
 
 for %%# in (
@@ -504,20 +504,20 @@ if %frz%==0 if %_unattended%==0 (
 echo:
 echo %line%
 echo:
-echo      Activation is not working for some users and IDM may show fake serial nag screen.
+echo     某些用户无法激活，IDM 可能会显示虚假的串行唠叨屏幕。
 echo:
 call :_color2 %_White% "     " %_Green% "Its recommended to use Freeze Trial option instead."
 echo %line%
 echo:
-choice /C:19 /N /M ">    [1] Go Back [9] Activate : "
+choice /C:19 /N /M ">    [1] 上一页 [9] 激活 : "
 if !errorlevel!==1 goto :MainMenu
 cls
 )
 
 echo:
 if not exist "%IDMan%" (
-call :_color %Red% "IDM [Internet Download Manager] is not Installed."
-echo You can download it from  https://www.internetdownloadmanager.com/download.html
+call :_color %Red% "IDM [Internet Download Manager] 未安装。"
+echo 您可以从以下位置下载它  https://www.internetdownloadmanager.com/download.html
 goto done
 )
 
@@ -548,7 +548,7 @@ set _time=
 for /f %%a in ('%psc% "(Get-Date).ToString('yyyyMMdd-HHmmssfff')"') do set _time=%%a
 
 echo:
-echo Creating backup of CLSID registry keys in %SystemRoot%\Temp
+echo  在 %SystemRoot%\Temp
 
 reg export %CLSID% "%SystemRoot%\Temp\_Backup_HKCU_CLSID_%_time%.reg"
 if not %HKCUsync%==1 reg export %CLSID2% "%SystemRoot%\Temp\_Backup_HKU-%_sid%_CLSID_%_time%.reg"
@@ -563,9 +563,9 @@ if %frz%==0 call :register_IDM
 call :download_files
 if not defined _fileexist (
 %eline%
-echo Error: Unable to download files with IDM.
+echo 报错: 无法使用 IDM 下载文件。
 echo:
-echo Help: %mas%IAS-Help#troubleshoot
+echo 帮助 - %mas%IAS-帮助#解决
 goto :done
 )
 
@@ -626,7 +626,7 @@ exit /b
 :register_IDM
 
 echo:
-echo Applying registration details...
+echo 正在应用注册详细信息...
 echo:
 
 set /a fname = %random% %% 9999 + 1000
@@ -651,7 +651,7 @@ exit /b
 :download_files
 
 echo:
-echo Triggering a few downloads to create certain registry keys, please wait...
+echo 触发一些下载以创建某些注册表项，请稍候...
 echo:
 
 set "file=%SystemRoot%\Temp\temp.png"
@@ -689,7 +689,7 @@ goto :Check_file
 :add_key
 
 echo:
-echo Adding registry key...
+echo 正在添加注册表项...
 echo:
 
 set "reg="%HKLM%" /v "AdvIntDriverEnabled2""
