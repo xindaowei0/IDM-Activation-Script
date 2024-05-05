@@ -387,7 +387,7 @@ echo:               [5] 帮助
 echo:               [0] 退出
 echo:            ___________________________________________________
 echo:         
-call :_color2 %_White% "             " %_Green% "Enter a menu option in the Keyboard [1,2,3,4,5,0]"
+call :_color2 %_White% "             " %_Green% "在键盘 [1,2,3,4,5,0] 中输入菜单选项"
 choice /C:123450 /N
 set _erl=%errorlevel%
 
